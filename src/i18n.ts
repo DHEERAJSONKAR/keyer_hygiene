@@ -21,13 +21,15 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
-    lng: 'en',
+    debug: false,
     interpolation: {
       escapeValue: false
     },
     detection: {
-      order: ['localStorage', 'browserLanguageDetector'],
-      caches: ['localStorage']
+      order: ['localStorage', 'cookie', 'browserLanguageDetector'],
+      caches: ['localStorage', 'cookie'],
+      lookupLocalStorage: 'i18nextLng',
+      lookupCookie: 'i18nextLng'
     }
   });
 

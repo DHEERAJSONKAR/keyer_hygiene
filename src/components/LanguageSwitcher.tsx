@@ -8,7 +8,8 @@ const LanguageSwitcher: React.FC = () => {
   const { isDark } = useTheme();
 
   const toggleLanguage = () => {
-    const newLanguage = i18n.language === 'en' ? 'hi' : 'en';
+    const currentLang = i18n.language || 'en';
+    const newLanguage = currentLang === 'en' ? 'hi' : 'en';
     i18n.changeLanguage(newLanguage);
   };
 
@@ -24,7 +25,7 @@ const LanguageSwitcher: React.FC = () => {
     >
       <Globe className="h-4 w-4" />
       <span className="font-semibold">
-        {i18n.language === 'en' ? 'हिंदी' : 'English'}
+        {i18n.language === 'en' ? 'ENGLISH' : 'हिन्दी'}
       </span>
     </button>
   );

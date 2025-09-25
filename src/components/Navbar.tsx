@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
             <span className={`text-xl font-bold ${
               isDark ? 'text-white' : 'text-gray-900'
             }`}>
-              Keyar Hygiene
+              Keyar 
             </span>
           </Link>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, Droplet } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import DarkModeToggle from './DarkModeToggle';
@@ -31,13 +31,12 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Droplet className="h-8 w-8 text-blue-600" />
-            <span className={`text-xl font-bold ${
-              isDark ? 'text-white' : 'text-gray-900'
-            }`}>
-              Keyar 
-            </span>
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity duration-200">
+            <img 
+              src="/gallery-images/logo.jpeg" 
+              alt="Keyar Logo" 
+              className="h-14 w-20 rounded-lg object-contain bg-white shadow-md border border-gray-200 hover:shadow-lg transition-shadow duration-200"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -48,7 +47,7 @@ const Navbar: React.FC = () => {
                 to={item.path}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                   isActive(item.path)
-                    ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20'
+                    ? 'text-green-600 bg-green-50 dark:bg-green-900/20'
                     : isDark
                       ? 'text-gray-300 hover:text-white hover:bg-gray-800'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
@@ -92,7 +91,7 @@ const Navbar: React.FC = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
                   isActive(item.path)
-                    ? 'text-blue-600 bg-blue-50 dark:bg-blue-900/20'
+                    ? 'text-green-600 bg-green-50 dark:bg-green-900/20'
                     : isDark
                       ? 'text-gray-300 hover:text-white hover:bg-gray-800'
                       : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'

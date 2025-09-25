@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Droplet, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Footer: React.FC = () => {
@@ -16,8 +16,12 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <Droplet className="h-8 w-8 text-blue-500" />
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/gallery-images/logo.jpeg" 
+                alt="Keyar Logo" 
+                className="h-10 w-14 rounded-lg object-contain bg-white shadow-md border border-gray-200"
+              />
               <span className="text-xl font-bold text-white">Keyar Hygiene</span>
             </div>
             <p className="text-sm mb-4">{t('footer.tagline')}</p>

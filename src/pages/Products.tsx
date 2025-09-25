@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { ShoppingCart, Shield, Sparkles, Award, X, CheckCircle, Star } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Products: React.FC = () => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
+  const navigate = useNavigate();
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const products = [
     {
@@ -26,17 +30,17 @@ const Products: React.FC = () => {
       }
     },
     {
-      id: 'phenyl',
-      name: t('products.phenyl.name'),
-      description: t('products.phenyl.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
-      features: ['Disinfectant', 'Floor Cleaner', 'Fresh Fragrance'],
+      id: 'white-phenyl',
+      name: 'White Phenyle',
+      description: 'Powerful disinfectant for floors and surfaces',
+      image: '/gallery-images/8.png',
+      features: ['Disinfectant', 'Floor Cleaner', 'Fresh Fragrance', 'Multi-Surface'],
       color: 'from-blue-500 to-blue-600',
       detailedInfo: {
-        fullDescription: 'Keyar Phenyl is a powerful disinfectant floor cleaner that eliminates germs while leaving your floors spotless and fresh. Ideal for homes, offices, and commercial spaces.',
-        specifications: ['1L, 5L containers available', 'Concentrated formula', 'Multiple fragrance options', 'Biodegradable ingredients'],
-        benefits: ['Deep cleaning action', 'Long-lasting fresh fragrance', 'Kills disease-causing germs', 'Safe for all floor types'],
-        usage: ['Mix 50ml in 1 bucket of water', 'Mop floors thoroughly', 'No need to rinse', 'Use daily for best hygiene'],
+        fullDescription: 'Keyar White Phenyle is a powerful disinfectant floor cleaner that eliminates germs while leaving your floors spotless and fresh. Perfect for homes, offices, and commercial spaces with superior cleaning power.',
+        specifications: ['1L, 5L containers available', 'Concentrated white formula', 'Multiple fragrance options', 'Biodegradable ingredients', 'Non-staining formula'],
+        benefits: ['Deep cleaning action', 'Long-lasting fresh fragrance', 'Kills 99.9% disease-causing germs', 'Safe for all floor types', 'Leaves floors streak-free'],
+        usage: ['Mix 50ml in 1 bucket of water', 'Mop floors thoroughly', 'No need to rinse', 'Use daily for best hygiene', 'Ideal for bathroom and kitchen floors'],
         price: '₹120 - ₹580',
         rating: 4.7
       }
@@ -61,7 +65,7 @@ const Products: React.FC = () => {
       id: 'glass',
       name: t('products.glass.name'),
       description: t('products.glass.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
+      image: '/gallery-images/3.png',
       features: ['Streak-Free', 'Crystal Clear', 'Quick Action'],
       color: 'from-cyan-500 to-cyan-600',
       detailedInfo: {
@@ -77,7 +81,7 @@ const Products: React.FC = () => {
       id: 'dish',
       name: t('products.dish.name'),
       description: t('products.dish.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
+      image: '/gallery-images/4.png',
       features: ['Grease Cutting', 'Gentle on Hands', 'Concentrated Formula'],
       color: 'from-yellow-500 to-yellow-600',
       detailedInfo: {
@@ -107,70 +111,375 @@ const Products: React.FC = () => {
     }
   ];
 
+  // Auto-slide effect
+  React.useEffect(() => {
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % products.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying, products.length]);
+
+  // Debug effect to monitor selectedProduct changes
+  React.useEffect(() => {
+    console.log('=== SELECTED PRODUCT CHANGED ===');
+    console.log('selectedProduct:', selectedProduct);
+    console.log('selectedProduct type:', typeof selectedProduct);
+    console.log('selectedProduct null check:', selectedProduct === null);
+    console.log('selectedProduct truthy check:', !!selectedProduct);
+    if (selectedProduct) {
+      console.log('Modal should be visible now for product:', selectedProduct.name);
+      console.log('Product details:', selectedProduct.detailedInfo);
+    } else {
+      console.log('Modal should be hidden now');
+    }
+  }, [selectedProduct]);
+
+  // Force re-render when selectedProduct changes
+  const [modalKey, setModalKey] = React.useState(0);
+  React.useEffect(() => {
+    if (selectedProduct) {
+      setModalKey(prev => prev + 1);
+    }
+  }, [selectedProduct]);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % products.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + products.length) % products.length);
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    }`}>
-      {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-blue-600 to-green-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">{t('products.title')}</h1>
-          <p className="text-xl md:text-2xl mb-8">{t('products.subtitle')}</p>
+    <>
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(60px) scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(80px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0px) rotate(0deg); 
+          }
+          50% { 
+            transform: translateY(-20px) rotate(180deg); 
+          }
+        }
+        
+        @keyframes pulse-glow {
+          0%, 100% { 
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+          }
+          50% { 
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+          }
+        }
+        
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        @keyframes bounce-in {
+          0% {
+            opacity: 0;
+            transform: scale(0.3);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+          70% { transform: scale(0.9); }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        
+        @keyframes slide-up-fade {
+          from {
+            opacity: 0;
+            transform: translateY(100px) rotateX(90deg);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) rotateX(0deg);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 1.2s ease-out;
+        }
+        
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-pulse-glow {
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .animate-bounce-in {
+          animation: bounce-in 0.8s ease-out;
+        }
+        
+        .animate-slide-up-fade {
+          animation: slide-up-fade 0.8s ease-out;
+        }
+        
+        .shimmer-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .shimmer-effect::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+          );
+          transform: translateX(-100%);
+          animation: shimmer 2s infinite;
+        }
+        
+        .glass-morphism {
+          backdrop-filter: blur(16px) saturate(180%);
+          background-color: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gradient-border {
+          position: relative;
+          background: linear-gradient(45deg, #10b981, #14b8a6, #3b82f6);
+          background-size: 400% 400%;
+          animation: gradient-shift 4s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        .text-shimmer {
+          background: linear-gradient(
+            45deg,
+            #10b981,
+            #14b8a6,
+            #3b82f6,
+            #10b981
+          );
+          background-size: 300% 300%;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradient-shift 3s ease infinite;
+        }
+        
+        @media (max-width: 768px) {
+          .animate-fade-in-up {
+            animation-duration: 0.8s;
+          }
           
-          <div className="flex flex-wrap justify-center gap-4 text-sm">
-            <div className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full">
-              <Shield className="h-4 w-4" />
-              <span>99.9% Germ Protection</span>
+          .hover-lift:hover {
+            transform: translateY(-4px) scale(1.01);
+          }
+        }
+      `}</style>
+      
+      <div className={`min-h-screen transition-colors duration-300 ${
+        isDark ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+      }`}>
+      {/* Enhanced Hero Section */}
+      <section className="relative py-24 bg-gradient-to-r from-green-500 via-teal-500 to-blue-500 text-white overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute top-20 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
+        </div>
+        
+        {/* Floating Particles */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full opacity-20 animate-float"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 4}s`,
+                animationDuration: `${3 + Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-fade-in-up">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-8 bg-gradient-to-r from-white via-green-100 to-blue-100 bg-clip-text text-transparent drop-shadow-2xl">
+              {t('products.title')}
+            </h1>
+            <p className="text-xl md:text-3xl mb-12 text-green-100 max-w-4xl mx-auto leading-relaxed font-light">
+              {t('products.subtitle')}
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-6 text-sm mb-8">
+              {[
+                { icon: Shield, text: "99.9% Germ Protection", delay: "0ms" },
+                { icon: Award, text: "ISO Certified", delay: "200ms" },
+                { icon: Sparkles, text: "Premium Quality", delay: "400ms" }
+              ].map((badge, index) => (
+                <div
+                  key={index}
+                  className="group flex items-center space-x-3 bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                  style={{ animationDelay: badge.delay }}
+                >
+                  <badge.icon className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="font-medium">{badge.text}</span>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full">
-              <Award className="h-4 w-4" />
-              <span>ISO Certified</span>
-            </div>
-            <div className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full">
-              <Sparkles className="h-4 w-4" />
-              <span>Premium Quality</span>
+            
+            {/* Scroll Indicator */}
+            <div className="flex justify-center mt-12">
+              <div className="animate-bounce">
+                <svg className="h-6 w-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Products Grid */}
-      <section className="py-16">
+      {/* Products Section */}
+      <section className={`py-20 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product) => (
+          {/* Section Header */}
+          <div className="text-center mb-16">
+            <div className="inline-block">
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-green-600 via-teal-600 to-blue-600 bg-clip-text text-transparent">
+                Our Products
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full"></div>
+            </div>
+            <p className={`text-xl mt-6 max-w-3xl mx-auto leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Discover our premium range of cleaning solutions designed for modern Indian households
+            </p>
+          </div>
+
+          {/* Enhanced Products Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+            {products.map((product, index) => (
               <div
                 key={product.id}
-                className={`group relative overflow-hidden rounded-2xl transition-all duration-300 hover:shadow-2xl hover:scale-105 ${
-                  isDark ? 'bg-gray-800 hover:bg-gray-700' : 'bg-white border border-gray-200 hover:shadow-2xl'
+                className={`group relative overflow-hidden rounded-3xl transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+                  isDark ? 'bg-gray-800 shadow-xl border border-gray-700' : 'bg-white border border-gray-100 shadow-lg'
                 }`}
+                style={{ 
+                  animationDelay: `${index * 150}ms`,
+                  animation: 'fadeInUp 0.8s ease-out forwards'
+                }}
               >
                 {/* Product Image */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-64 overflow-hidden bg-gray-50">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105 group-hover:brightness-110 p-4"
+                    loading="lazy"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${product.color} opacity-20`}></div>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${product.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
+                  
+                  {/* Floating Elements */}
+                  <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-100">
+                    <div className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                      <span className="text-xs font-bold text-gray-900">Premium</span>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 delay-200">
+                    <div className="bg-yellow-400 text-gray-900 px-2 py-1 rounded-full flex items-center space-x-1">
+                      <Star className="h-3 w-3 fill-current" />
+                      <span className="text-xs font-bold">{product.detailedInfo.rating}</span>
+                    </div>
+                  </div>
+
+                  {/* Interactive Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center p-6">
+                    <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      <p className="text-sm font-bold mb-2">Click to Learn More</p>
+                      <div className="flex justify-center space-x-2">
+                        {[...Array(3)].map((_, i) => (
+                          <div key={i} className={`w-2 h-2 bg-white rounded-full animate-pulse`} style={{ animationDelay: `${i * 200}ms` }}></div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                  <p className={`text-sm mb-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                    {product.description}
-                  </p>
+                <div className="p-8">
+                  <div className="mb-4">
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-green-600 group-hover:to-blue-600 group-hover:bg-clip-text transition-all duration-300">
+                      {product.name}
+                    </h3>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                      {product.description}
+                    </p>
+                  </div>
 
                   {/* Features */}
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold mb-2">Key Features:</h4>
+                  <div className="mb-6">
+                    <h4 className="text-sm font-semibold mb-3 flex items-center">
+                      <Sparkles className="h-4 w-4 mr-2 text-purple-500" />
+                      Key Features:
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {product.features.map((feature, featureIndex) => (
                         <span
                           key={featureIndex}
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            isDark ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-700'
+                          className={`text-xs px-3 py-1 rounded-full transition-all duration-300 hover:scale-110 ${
+                            isDark ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                           }`}
                         >
                           {feature}
@@ -179,52 +488,110 @@ const Products: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Price Display */}
+                  <div className="mb-6">
+                    <span className="text-2xl font-bold text-green-600">{product.detailedInfo.price}</span>
+                    <span className={`ml-2 text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Starting from</span>
+                  </div>
+
                   {/* CTA Button */}
                   <button 
-                    onClick={() => setSelectedProduct(product)}
-                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-200 bg-gradient-to-r ${product.color} text-white hover:shadow-lg transform hover:scale-105 flex items-center justify-center space-x-2`}
+                    type="button"
+                    onClick={() => {
+                      console.log('=== LEARN MORE BUTTON CLICKED ===');
+                      console.log('Product:', product.name);
+                      console.log('Product ID:', product.id);
+                      console.log('Current selectedProduct:', selectedProduct);
+                      
+                      // Force update by setting to null first, then to product
+                      setSelectedProduct(null);
+                      setTimeout(() => {
+                        setSelectedProduct(product);
+                        console.log('Modal should open now for:', product.name);
+                      }, 10);
+                    }}
+                    className={`w-full py-4 px-6 rounded-xl font-bold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-xl active:scale-95 bg-gradient-to-r ${product.color} hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-blue-300/50 flex items-center justify-center space-x-3 cursor-pointer`}
                   >
-                    <ShoppingCart className="h-4 w-4" />
+                    <ShoppingCart className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                     <span>Learn More</span>
+                    <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
                   </button>
                 </div>
 
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-6">
-                  <div className="text-white text-center">
-                    <p className="text-sm font-medium">Premium Quality Assured</p>
-                  </div>
-                </div>
+                {/* Glow Effect */}
+                <div className={`absolute -inset-1 bg-gradient-to-r ${product.color} rounded-3xl opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300 -z-10`}></div>
               </div>
             ))}
+          </div>
+
+          {/* Call to Action Section */}
+          <div className="mt-20 text-center">
+            <div className={`inline-block p-8 rounded-3xl ${isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'} shadow-xl`}>
+              <h3 className="text-2xl font-bold mb-4">Need Help Choosing?</h3>
+              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                Our experts are here to help you find the perfect cleaning solution for your needs.
+              </p>
+              <button 
+                onClick={() => navigate('/contact')}
+                className="px-8 py-3 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
+              >
+                <span>Contact Our Experts</span>
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Product Detail Modal */}
+      {/* Debug Modal State */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-          <div className={`relative max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl ${
-            isDark ? 'bg-gray-800' : 'bg-white'
-          } shadow-2xl`}>
-            {/* Close Button */}
+        <div className="fixed top-4 left-4 bg-red-500 text-white p-2 rounded z-[10000] text-sm">
+          Modal Active: {selectedProduct.name}
+        </div>
+      )}
+
+      {/* Enhanced Product Detail Modal */}
+      {selectedProduct && (
+        <div key={modalKey} className="fixed inset-0 bg-black bg-opacity-90 z-[9999] flex items-center justify-center p-4 animate-fadeIn">
+          <div 
+            className="fixed inset-0"
+            onClick={() => setSelectedProduct(null)}
+          />
+          <div className={`relative max-w-6xl w-full max-h-[95vh] overflow-y-auto rounded-3xl ${
+            isDark ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+          } shadow-2xl animate-bounce-in`}>
+            {/* Enhanced Close Button */}
             <button
-              onClick={() => setSelectedProduct(null)}
-              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+              onClick={() => {
+                console.log('Close button clicked');
+                setSelectedProduct(null);
+              }}
+              className={`absolute top-6 right-6 z-20 p-4 rounded-full transition-all duration-300 hover:scale-110 hover:rotate-90 ${
+                isDark ? 'bg-gray-700 hover:bg-red-600 text-white' : 'bg-gray-100 hover:bg-red-500 hover:text-white text-gray-600'
+              } shadow-lg backdrop-blur-sm`}
             >
-              <X className="h-6 w-6 text-gray-600" />
+              <X className="h-6 w-6" />
             </button>
+
+            {/* Shimmer Effect */}
+            <div className="absolute inset-0 shimmer-effect rounded-3xl pointer-events-none"></div>
 
             {/* Modal Content */}
             <div className="p-8">
               {/* Header with Image and Basic Info */}
               <div className="flex flex-col md:flex-row gap-8 mb-8">
                 <div className="md:w-1/2">
-                  <img
-                    src={selectedProduct.image}
-                    alt={selectedProduct.name}
-                    className="w-full h-64 object-cover rounded-xl"
-                  />
+                  <div className="bg-gray-50 rounded-xl p-6">
+                    <img
+                      src={selectedProduct.image}
+                      alt={selectedProduct.name}
+                      className="w-full h-64 object-contain rounded-xl"
+                    />
+                  </div>
                 </div>
                 <div className="md:w-1/2">
                   <h2 className="text-3xl font-bold mb-4">{selectedProduct.name}</h2>
@@ -257,7 +624,7 @@ const Products: React.FC = () => {
                   <div className="mb-6">
                     <h3 className="text-lg font-semibold mb-3">Key Features</h3>
                     <div className="flex flex-wrap gap-2">
-                      {selectedProduct.features.map((feature, index) => (
+                      {selectedProduct.features.map((feature: string, index: number) => (
                         <span
                           key={index}
                           className={`px-3 py-1 rounded-full text-sm ${
@@ -289,7 +656,7 @@ const Products: React.FC = () => {
                     Specifications
                   </h4>
                   <ul className="space-y-2">
-                    {selectedProduct.detailedInfo.specifications.map((spec, index) => (
+                    {selectedProduct.detailedInfo.specifications.map((spec: string, index: number) => (
                       <li key={index} className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} flex items-start`}>
                         <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                         {spec}
@@ -305,7 +672,7 @@ const Products: React.FC = () => {
                     Benefits
                   </h4>
                   <ul className="space-y-2">
-                    {selectedProduct.detailedInfo.benefits.map((benefit, index) => (
+                    {selectedProduct.detailedInfo.benefits.map((benefit: string, index: number) => (
                       <li key={index} className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} flex items-start`}>
                         <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                         {benefit}
@@ -321,7 +688,7 @@ const Products: React.FC = () => {
                     How to Use
                   </h4>
                   <ul className="space-y-2">
-                    {selectedProduct.detailedInfo.usage.map((step, index) => (
+                    {selectedProduct.detailedInfo.usage.map((step: string, index: number) => (
                       <li key={index} className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} flex items-start`}>
                         <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-2 mt-0.5 flex-shrink-0">
                           {index + 1}
@@ -341,15 +708,76 @@ const Products: React.FC = () => {
                     Contact us for bulk orders, distribution opportunities, or product inquiries.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 bg-gradient-to-r ${selectedProduct.color} text-white hover:shadow-lg transform hover:scale-105`}>
-                      Contact for Orders
+                    <button 
+                      onClick={() => {
+                        setSelectedProduct(null);
+                        navigate('/contact');
+                      }}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 bg-gradient-to-r ${selectedProduct.color} text-white hover:shadow-lg transform hover:scale-105 flex items-center justify-center space-x-2`}
+                    >
+                      <span>Contact for Orders</span>
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
                     </button>
-                    <button className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
-                      isDark 
-                        ? 'bg-gray-600 hover:bg-gray-500 text-white' 
-                        : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
-                    }`}>
-                      Download Brochure
+                    <button 
+                      onClick={() => {
+                        // Create product-specific brochure content
+                        const brochureContent = `
+KEYAR HYGIENE PRODUCTS
+${selectedProduct.name} - Product Brochure
+
+Product Description:
+${selectedProduct.detailedInfo.fullDescription}
+
+Key Features:
+${selectedProduct.features.map((feature: string) => `• ${feature}`).join('\n')}
+
+Specifications:
+${selectedProduct.detailedInfo.specifications.map((spec: string) => `• ${spec}`).join('\n')}
+
+Benefits:
+${selectedProduct.detailedInfo.benefits.map((benefit: string) => `• ${benefit}`).join('\n')}
+
+Usage Instructions:
+${selectedProduct.detailedInfo.usage.map((step: string, index: number) => `${index + 1}. ${step}`).join('\n')}
+
+Price Range: ${selectedProduct.detailedInfo.price}
+Customer Rating: ${selectedProduct.detailedInfo.rating}/5.0
+
+Contact Information:
+Company: Namaste SS International Pvt. Ltd.
+Email: info@keyarhygiene.com
+Phone: +91-XXXXXXXXXX
+
+Visit us at: www.keyarhygiene.com
+
+© 2024 Keyar Hygiene Products. All rights reserved.
+                        `;
+
+                        // Create and download the brochure
+                        const blob = new Blob([brochureContent], { type: 'text/plain' });
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `Keyar-${selectedProduct.name.replace(/\s+/g, '-')}-Brochure.txt`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        window.URL.revokeObjectURL(url);
+                        
+                        console.log('Brochure downloaded for:', selectedProduct.name);
+                      }}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all duration-200 ${
+                        isDark 
+                          ? 'bg-gray-600 hover:bg-gray-500 text-white' 
+                          : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                      } flex items-center justify-center space-x-2 hover:scale-105 active:scale-95`}
+                    >
+                      <span>Download Brochure</span>
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
                     </button>
                   </div>
                 </div>
@@ -404,7 +832,8 @@ const Products: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

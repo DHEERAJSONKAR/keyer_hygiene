@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "home": "Home",
+    "awareness": "Awareness", 
+    "products": "Products",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "home": {
+    "welcome": "Welcome to Keyar Hygiene",
+    "slogan": "Clean India, Healthy India",
+    "subSlogan": "A Clean Place Is A Safe Place",
+    "mission": "Leading the way towards a cleaner, healthier India through innovative hygiene solutions",
+    "cta": "Explore Products",
+    "stats": {
+      "products": "Quality Products",
+      "customers": "Happy Customers", 
+      "states": "States Covered",
+      "experience": "Years Experience"
+    }
+  },
+  "awareness": {
+    "title": "Hygiene Awareness",
+    "subtitle": "Building a Healthier Tomorrow",
+    "importance": "Toilet hygiene is crucial for preventing diseases and maintaining public health. Clean toilets reduce the spread of infections and create safer communities.",
+    "swachhBharat": "Supporting Swachh Bharat Mission",
+    "swachhDesc": "We proudly support the Swachh Bharat Mission, working towards making India clean and healthy for all citizens.",
+    "tips": {
+      "title": "Hygiene Tips",
+      "tip1": "Wash hands regularly with soap and water",
+      "tip2": "Use quality cleaning products for toilets", 
+      "tip3": "Maintain clean surroundings",
+      "tip4": "Regular sanitization of surfaces"
+    },
+    "statistics": {
+      "title": "Health Statistics",
+      "diseases": "Diseases Prevented",
+      "awareness": "Awareness Level",
+      "cleanliness": "Cleanliness Index"
+    }
+  },
+  "products": {
+    "title": "Our Cleaning Products",
+    "subtitle": "Quality solutions for every cleaning need",
+    "handwash": {
+      "name": "Keyar Handwash",
+      "description": "Premium handwash with antibacterial protection for everyday use"
+    },
+    "phenyl": {
+      "name": "White Phenyl",
+      "description": "Powerful disinfectant for floors and surfaces"
+    },
+    "toilet": {
+      "name": "Toilet Cleaner", 
+      "description": "Extra power formula for deep toilet cleaning"
+    },
+    "glass": {
+      "name": "Glass Cleaner",
+      "description": "Streak-free cleaning for all glass surfaces"
+    },
+    "dish": {
+      "name": "Dish Cleaner",
+      "description": "Effective dishwashing liquid for spotless dishes"
+    },
+    "surface": {
+      "name": "Surface Cleaner",
+      "description": "Multi-surface cleaner for comprehensive cleaning"
+    }
+  },
+  "gallery": {
+    "title": "Awareness Gallery",
+    "subtitle": "Visual stories of hygiene and cleanliness"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch for any queries or support",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address", 
+      "message": "Message",
+      "send": "Send Message"
+    },
+    "info": {
+      "company": "Namaste SS International Pvt. Ltd.",
+      "email": "namastessinpvt.ltd@gmail.com",
+      "phone": "Customer Care: 8354818383, 8429398383"
+    },
+    "whatsapp": "WhatsApp Us"
+  },
+  "footer": {
+    "tagline": "Your trusted partner for hygiene solutions",
+    "rights": "All rights reserved."
+  }
+}

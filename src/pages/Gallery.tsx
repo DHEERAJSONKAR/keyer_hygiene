@@ -208,24 +208,24 @@ const Gallery: React.FC = () => {
       {/* Image Gallery */}
       <section className={`pb-16 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {filteredImages.map((image, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
+                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 sm:hover:-translate-y-2 ${
                   isDark ? 'bg-gray-800 shadow-xl' : 'bg-white border border-gray-100 shadow-lg'
                 }`}
                 onClick={() => setSelectedImage(image)}
                 style={{ 
-                  animationDelay: `${index * 100}ms`,
+                  animationDelay: `${index * 50}ms`,
                   animation: 'fadeInUp 0.6s ease-out forwards'
                 }}
               >
-                <div className="aspect-square overflow-hidden relative">
+                <div className="aspect-square overflow-hidden relative bg-gray-100">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
+                    className="w-full h-full object-contain sm:object-cover transition-all duration-500 group-hover:scale-105 sm:group-hover:scale-110 group-hover:brightness-110 p-2 sm:p-0"
                     loading="lazy"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -238,37 +238,38 @@ const Gallery: React.FC = () => {
                 </div>
                 
                 {/* Interactive Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/80 via-blue-600/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-green-600/80 via-teal-600/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                   <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 mb-3 mx-auto w-16 h-16 flex items-center justify-center">
-                      <ZoomIn className="h-8 w-8" />
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 sm:p-4 mb-2 sm:mb-3 mx-auto w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
+                      <ZoomIn className="h-6 w-6 sm:h-8 sm:w-8" />
                     </div>
-                    <p className="font-bold text-lg">View Details</p>
-                    <p className="text-sm opacity-90">Click to explore</p>
+                    <p className="font-bold text-sm sm:text-lg">View Details</p>
+                    <p className="text-xs sm:text-sm opacity-90 hidden sm:block">Click to explore</p>
                   </div>
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10">
+                  <span className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs font-bold shadow-lg">
                     {image.category}
                   </span>
                 </div>
 
                 {/* Premium Badge */}
-                <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="bg-yellow-400 text-gray-900 px-2 py-1 rounded-full text-xs font-bold shadow-lg flex items-center space-x-1">
                     <span className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse"></span>
-                    <span>Premium</span>
+                    <span className="hidden sm:inline">Premium</span>
+                    <span className="sm:hidden">★</span>
                   </div>
                 </div>
 
                 {/* Image Title */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
-                  <h3 className="text-white font-bold text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-3 sm:p-6">
+                  <h3 className="text-white font-bold text-sm sm:text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                     {image.title}
                   </h3>
-                  <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                  <p className="text-gray-300 text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 hidden sm:block">
                     {image.alt.substring(0, 50)}...
                   </p>
                 </div>
@@ -296,23 +297,23 @@ const Gallery: React.FC = () => {
 
       {/* Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-6xl w-full max-h-full flex flex-col lg:flex-row gap-6">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-2 sm:p-4">
+          <div className="relative w-full h-full sm:max-w-6xl sm:w-full sm:max-h-full flex flex-col lg:flex-row gap-2 sm:gap-6">
             {/* Close Button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 z-20 p-3 rounded-full bg-red-500 hover:bg-red-600 text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 p-2 sm:p-3 rounded-full bg-red-500 hover:bg-red-600 text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110"
               title="Close"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
             
             {/* Image Container */}
-            <div className="flex-1 flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center min-h-0">
               <img
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-[60vh] sm:max-h-[80vh] object-contain rounded-lg shadow-2xl"
               />
             </div>
             

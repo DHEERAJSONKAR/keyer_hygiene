@@ -22,10 +22,10 @@ const Footer: React.FC = () => {
                 alt="Keyar Logo" 
                 className="h-10 w-14 rounded-lg object-contain bg-white shadow-md border border-gray-200"
               />
-              <span className="text-xl font-bold text-white">Keyar Hygiene</span>
+              <span className="text-xl font-bold text-white">Keyar</span>
             </div>
             <p className="text-sm mb-4">{t('footer.tagline')}</p>
-            <p className="text-xs">{t('contact.info.company')}</p>
+            <p className="text-xs">{t('contact.iInfo.company')}</p>
           </div>
 
           {/* Contact Info */}

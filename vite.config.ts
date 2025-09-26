@@ -7,4 +7,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    hmr: {
+      overlay: false
+    }
+  },
+  define: {
+    __WS_TOKEN__: JSON.stringify(process.env.VITE_WS_TOKEN || '')
+  }
 });

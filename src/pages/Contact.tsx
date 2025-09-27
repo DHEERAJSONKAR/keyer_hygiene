@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone, MapPin, Send, MessageCircle, Loader } from 'lucide-react';
+import { Mail, MapPin, Send, MessageCircle, Loader } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import emailjs from '@emailjs/browser';
 
@@ -83,7 +83,7 @@ const Contact: React.FC = () => {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent('Hello! I would like to know more about Keyar Hygiene products.');
-    window.open(`https://wa.me/918354818383?text=${message}`, '_blank');
+    window.open(`https://wa.me/918429398383?text=${message}`, '_blank');
   };
 
   return (
@@ -241,18 +241,6 @@ const Contact: React.FC = () => {
                     <h4 className="font-semibold mb-1">Email</h4>
                     <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                       {t('contact.info.email')}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-lg ${isDark ? 'bg-purple-900/20' : 'bg-purple-100'}`}>
-                    <Phone className="h-6 w-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-1">Phone</h4>
-                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                      8354818383, 8429398383
                     </p>
                   </div>
                 </div>

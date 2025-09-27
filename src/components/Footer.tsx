@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mail, Phone } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Footer: React.FC = () => {
@@ -35,10 +35,6 @@ const Footer: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
                 <span>{t('contact.info.email')}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>8354818383, 8429398383</span>
               </div>
             </div>
           </div>

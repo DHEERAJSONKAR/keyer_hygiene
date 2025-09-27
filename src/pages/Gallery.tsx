@@ -3,83 +3,182 @@ import { useTranslation } from 'react-i18next';
 import { X, ZoomIn } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
+interface GalleryImage {
+  src: string;
+  alt: string;
+  category: string;
+  title: string;
+  productName?: string;
+  price?: string;
+  rating?: number;
+  features?: string[];
+  description?: string;
+  specifications?: string[];
+  usage?: string;
+}
+
 const Gallery: React.FC = () => {
   const { t } = useTranslation();
   const { isDark } = useTheme();
-  const [selectedImage, setSelectedImage] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
-  const galleryImages = [
+
+  const galleryImages: GalleryImage[] = [
     {
       src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.12.11.jpeg',
-      alt: 'Keyar Product Range - Complete cleaning solutions',
-      category: 'Products',
-      title: 'Complete Product Range'
+      alt: 'Keyar Product Range - Complete cleaning solutions for every need',
+      category: 'Complete Range',
+      title: 'Complete Product Range',
+      productName: 'Keyar Complete Range',
+      price: '₹45 - ₹1099',
+      rating: 4.8,
+      features: ['50+ Product Variants', 'ISO Certified', 'Made in India', 'Pan-India Availability'],
+      description: 'Comprehensive range of cleaning solutions designed to meet every hygiene need of Indian households.',
+      specifications: ['Available across 15+ states', '50+ different product variants', 'ISO certified manufacturing', 'International quality standards'],
+      usage: 'Choose the right product for each cleaning task for optimal results'
     },
     {
       src: '/gallery-images/Untitled-1.png',
-      alt: 'Keyar Cleaning Products - Quality assured solutions',
+      alt: 'Keyar Bathroom & Tiles Cleaner - Specialized bathroom cleaning solution',
       category: 'Bathroom Cleaners',
-      title: 'Quality Cleaning Products'
+      title: 'Bathroom & Tiles Cleaner',
+      productName: 'Keyar Bathroom Cleaner',
+      price: '₹89 - ₹299',
+      rating: 4.6,
+      features: ['Anti-Bacterial Action', 'Removes Soap Scum', 'Tiles & Surfaces', 'Fresh Fragrance'],
+      description: 'Specialized bathroom cleaner formulated to tackle soap scum, hard water stains, and bacterial growth.',
+      specifications: ['500ml bottles available', 'pH balanced formula', 'Safe for tiles and ceramics', 'Anti-bacterial properties'],
+      usage: 'Spray on surfaces, let sit 3-5 minutes, scrub if needed, rinse thoroughly'
     },
     {
       src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.49.jpeg',
-      alt: 'Keyar Handwash - Premium antibacterial protection',
+      alt: 'Keyar Handwash - Premium antibacterial protection with moisturizing formula',
       category: 'Handwash',
-      title: 'Premium Handwash'
+      title: 'Premium Antibacterial Handwash',
+      productName: 'Keyar Handwash',
+      price: '₹149 - ₹1099',
+      rating: 4.8,
+      features: ['99.9% Germ Protection', 'Moisturizing Formula', 'pH Balanced', 'Pleasant Fragrance'],
+      description: 'Advanced antibacterial handwash that kills 99.9% of germs while keeping hands soft and moisturized.',
+      specifications: ['Available in 250ml, 500ml, 1L, 5L', 'Dermatologically tested', 'Safe for all skin types', 'Long-lasting fragrance'],
+      usage: 'Apply 2-3 drops on wet hands, rub for 20 seconds, rinse thoroughly'
     },
     {
       src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
-      alt: 'Keyar Toilet Cleaner - Deep cleaning formula',
+      alt: 'Keyar Toilet Cleaner - Extra power thick formula for deep cleaning',
       category: 'Toilet Cleaners',
-      title: 'Toilet Cleaning Solutions'
+      title: 'Extra Power Toilet Cleaner',
+      productName: 'Keyar Toilet Cleaner',
+      price: '₹99 - ₹799',
+      rating: 4.9,
+      features: ['Extra Power Formula', 'Thick Gel Formula', 'Stain Removal', 'Germ Kill 99.9%'],
+      description: 'Thick formula toilet cleaner that clings to surfaces for deeper cleaning and removes tough stains.',
+      specifications: ['500ml, 1L bottles', 'Hydrochloric acid based', 'Child-resistant cap', 'Angled nozzle design'],
+      usage: 'Apply under rim and bowl, let sit 10 minutes, scrub with brush, flush to rinse'
     },
     {
       src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.55.jpeg',
-      alt: 'Keyar Surface Cleaner - Multi-surface cleaning solution',
+      alt: 'Keyar Surface Cleaner - Multi-surface cleaning solution for kitchen and home',
       category: 'Surface Cleaners',
-      title: 'Surface Cleaning Products'
+      title: 'Multi-Surface Cleaner',
+      productName: 'Keyar Surface Cleaner',
+      price: '₹99 - ₹999',
+      rating: 4.7,
+      features: ['Multi-Surface Formula', '99% Germ Kill', 'No Sticky Residue', 'Fresh Scent'],
+      description: 'Perfect for kitchen counters, tables, and appliances. Kills 99% germs with fresh scent.',
+      specifications: ['500ml spray bottle', 'Alcohol-based formula', 'Various fragrances', 'Food-safe surfaces'],
+      usage: 'Spray on surface, wipe with clean cloth, no rinsing required'
     },
     {
       src: '/gallery-images/2.png',
-      alt: 'Keyar Phenyl - Powerful floor disinfectant',
-      category: 'Floor Cleaners',
-      title: 'Floor Disinfectant'
+      alt: 'Keyar Surface Cleaner - Powerful multi-surface disinfectant',
+      category: 'Surface Cleaners',
+      title: 'Surface Disinfectant',
+      productName: 'Keyar Surface Cleaner',
+      price: '₹99 - ₹999',
+      rating: 4.7,
+      features: ['Multi-Surface', 'Instant Action', 'Safe Formula', 'Pleasant Fragrance'],
+      description: 'Effective surface cleaner for counters, appliances, and daily cleaning needs.',
+      specifications: ['500ml capacity', 'Alcohol-based sanitizer', 'Quick-dry formula', 'Multiple surface compatibility'],
+      usage: 'Spray directly, wipe clean, safe for food contact surfaces'
     },
     {
       src: '/gallery-images/3.png',
-      alt: 'Keyar Glass Cleaner - Streak-free cleaning',
-      category: 'Glass Cleaners',
-      title: 'Glass Cleaning Solutions'
+      alt: 'Keyar Toilet Cleaner - Professional strength cleaning formula',
+      category: 'Toilet Cleaners',
+      title: 'Professional Toilet Cleaner',
+      productName: 'Keyar Toilet Cleaner',
+      price: '₹99 - ₹799',
+      rating: 4.9,
+      features: ['Professional Strength', 'Thick Formula', 'Under-rim Action', 'Fresh Fragrance'],
+      description: 'Professional-grade toilet cleaner with thick formula for superior cleaning power.',
+      specifications: ['Extra thick gel', 'Under-rim cleaning nozzle', 'Stain removal technology', 'Fresh toilet fragrance'],
+      usage: 'Apply around bowl and under rim, wait 10 minutes, brush and flush'
     },
     {
       src: '/gallery-images/4.png',
-      alt: 'Keyar Dish Cleaner - Effective grease removal',
-      category: 'Dish Cleaners',
-      title: 'Dishwashing Solutions'
+      alt: 'Keyar Glass Cleaner - Crystal clear streak-free cleaning',
+      category: 'Glass Cleaners',
+      title: 'Crystal Clear Glass Cleaner',
+      productName: 'Keyar Glass Cleaner',
+      price: '₹99 - ₹999',
+      rating: 4.6,
+      features: ['Streak-Free Formula', 'Crystal Clear Results', 'Anti-Static', 'Quick Drying'],
+      description: 'Professional streak-free glass cleaner for windows, mirrors, and glass surfaces.',
+      specifications: ['500ml spray bottle', 'Ammonia-based formula', 'Blue indicator color', 'Anti-static properties'],
+      usage: 'Spray on glass surface, wipe with clean cloth, buff for extra shine'
     },
     {
       src: '/gallery-images/5.png',
-      alt: 'Keyar Hygiene Product Showcase',
-      category: 'Showcase',
-      title: 'Product Showcase'
+      alt: 'Keyar Liquid Detergent Gel - Premium concentrated cleaning power',
+      category: 'Laundry Care',
+      title: 'Liquid Detergent Gel',
+      productName: 'Keyar Liquid Detergent Gel',
+      price: '₹45 - ₹165',
+      rating: 4.5,
+      features: ['Ultra Concentrated', 'Advanced Stain Removal', 'Fabric Care', 'Long Lasting Fragrance'],
+      description: 'Premium concentrated liquid detergent gel with advanced stain removal technology.',
+      specifications: ['500ml, 1L, 2L, 5L containers', '4x concentrated formula', 'Enzyme technology', 'Biodegradable ingredients'],
+      usage: 'Machine wash: 30ml per full load, Hand wash: 10ml per bucket'
     },
     {
       src: '/gallery-images/7.png',
-      alt: 'Keyar Brand Display',
-      category: 'Showcase',
-      title: 'Brand Display'
+      alt: 'Keyar Brand Product Display - Quality cleaning solutions showcase',
+      category: 'Brand Showcase',
+      title: 'Brand Product Display',
+      productName: 'Keyar Brand Range',
+      price: '₹45 - ₹1099',
+      rating: 4.7,
+      features: ['Premium Quality', 'Wide Range', 'Trusted Brand', 'Value for Money'],
+      description: 'Keyar brand showcase displaying our commitment to quality and comprehensive cleaning solutions.',
+      specifications: ['Complete product portfolio', 'Quality assured products', 'Competitive pricing', 'Wide availability'],
+      usage: 'Choose appropriate products based on your specific cleaning needs'
     },
     {
       src: '/gallery-images/8.png',
-      alt: 'Keyar Products in Action',
-      category: 'White Phenyle',
-      title: 'Products'
+      alt: 'Keyar White Phenyle - Powerful floor disinfectant with fresh fragrance',
+      category: 'Floor Cleaners',
+      title: 'White Phenyle Disinfectant',
+      productName: 'Keyar White Phenyle',
+      price: '₹69 - ₹329',
+      rating: 4.7,
+      features: ['Powerful Disinfectant', 'Floor Cleaner', 'Fresh Fragrance', 'Multi-Surface'],
+      description: 'Concentrated white phenyle floor cleaner that eliminates germs and leaves floors spotless.',
+      specifications: ['1L, 5L containers', 'Concentrated formula', 'Multiple fragrances', 'Biodegradable ingredients'],
+      usage: 'Mix 50ml in 1 bucket water, mop floors thoroughly, no rinsing needed'
     },
     {
       src: '/gallery-images/9.png',
-      alt: 'Effective Cleaning Solutions',
+      alt: 'Keyar Handwash - Advanced antibacterial protection for daily use',
       category: 'Handwash',
-      title: 'Cleaning Demonstration'
+      title: 'Advanced Handwash Formula',
+      productName: 'Keyar Advanced Handwash',
+      price: '₹149 - ₹1099',
+      rating: 4.8,
+      features: ['Advanced Formula', 'Antibacterial Action', 'Moisturizing', 'Family Safe'],
+      description: 'Advanced antibacterial handwash formula perfect for frequent daily use by the entire family.',
+      specifications: ['Multiple size options', 'Advanced antibacterial technology', 'Skin-friendly pH', 'Clinically proven'],
+      usage: 'Use regularly throughout the day, especially before meals and after activities'
     }
   ];
 
@@ -89,6 +188,12 @@ const Gallery: React.FC = () => {
   const filteredImages = activeCategory === 'All' 
     ? galleryImages 
     : galleryImages.filter(img => img.category === activeCategory);
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = '/api/placeholder/400/400';
+    target.alt = 'Image temporarily unavailable';
+  };
 
   return (
     <>
@@ -208,11 +313,11 @@ const Gallery: React.FC = () => {
       {/* Image Gallery */}
       <section className={`pb-16 ${isDark ? 'bg-gray-900' : 'bg-gradient-to-b from-white to-gray-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {filteredImages.map((image, index) => (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 sm:hover:-translate-y-2 ${
+                className={`group relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 ${
                   isDark ? 'bg-gray-800 shadow-xl' : 'bg-white border border-gray-100 shadow-lg'
                 }`}
                 onClick={() => setSelectedImage(image)}
@@ -221,16 +326,13 @@ const Gallery: React.FC = () => {
                   animation: 'fadeInUp 0.6s ease-out forwards'
                 }}
               >
-                <div className="aspect-square overflow-hidden relative bg-gray-100">
+                <div className="aspect-square overflow-hidden relative bg-white">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-contain sm:object-cover transition-all duration-500 group-hover:scale-105 sm:group-hover:scale-110 group-hover:brightness-110 p-2 sm:p-0"
+                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105 group-hover:brightness-110 p-3"
                     loading="lazy"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/api/placeholder/400/400';
-                    }}
+                    onError={handleImageError}
                   />
                   
                   {/* Gradient Overlay */}
@@ -238,13 +340,19 @@ const Gallery: React.FC = () => {
                 </div>
                 
                 {/* Interactive Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-green-600/80 via-teal-600/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-t from-green-600/90 via-teal-600/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                   <div className="text-white text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3 sm:p-4 mb-2 sm:mb-3 mx-auto w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
-                      <ZoomIn className="h-6 w-6 sm:h-8 sm:w-8" />
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 mb-3 mx-auto w-16 h-16 flex items-center justify-center">
+                      <ZoomIn className="h-8 w-8" />
                     </div>
-                    <p className="font-bold text-sm sm:text-lg">View Details</p>
-                    <p className="text-xs sm:text-sm opacity-90 hidden sm:block">Click to explore</p>
+                    <p className="font-bold text-lg mb-1">View Product Details</p>
+                    <p className="text-sm opacity-90">Full specifications & pricing</p>
+                    {image.rating && (
+                      <div className="flex items-center justify-center space-x-1 mt-2">
+                        <span className="text-yellow-400">★</span>
+                        <span className="text-sm font-semibold">{image.rating}/5 Rating</span>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -265,12 +373,25 @@ const Gallery: React.FC = () => {
                 </div>
 
                 {/* Image Title */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-3 sm:p-6">
-                  <h3 className="text-white font-bold text-sm sm:text-lg mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    {image.title}
-                  </h3>
-                  <p className="text-gray-300 text-xs sm:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 hidden sm:block">
-                    {image.alt.substring(0, 50)}...
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-3 sm:p-4">
+                  <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-white font-bold text-sm sm:text-base mb-1">
+                      {image.productName || image.title}
+                    </h3>
+                    {image.price && (
+                      <p className="text-green-400 text-xs sm:text-sm font-semibold mb-1">
+                        {image.price}
+                      </p>
+                    )}
+                    {image.rating && (
+                      <div className="flex items-center space-x-1 mb-1">
+                        <span className="text-yellow-400 text-xs">★</span>
+                        <span className="text-white text-xs">{image.rating}/5</span>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-gray-300 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 line-clamp-2">
+                    {image.description || image.alt}
                   </p>
                 </div>
 
@@ -295,211 +416,180 @@ const Gallery: React.FC = () => {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* Enhanced Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-2 sm:p-4">
-          <div className="relative w-full h-full sm:max-w-6xl sm:w-full sm:max-h-full flex flex-col lg:flex-row gap-2 sm:gap-6">
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-0 sm:p-4 overflow-auto">
+          <div className="relative w-full h-full sm:w-auto sm:h-auto sm:max-w-7xl mx-auto flex flex-col lg:flex-row gap-0 sm:gap-6 sm:max-h-[95vh]">
             {/* Close Button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20 p-2 sm:p-3 rounded-full bg-red-500 hover:bg-red-600 text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110"
+              className="absolute top-4 right-4 z-20 p-3 rounded-full bg-red-500 hover:bg-red-600 text-white transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110"
               title="Close"
             >
-              <X className="h-5 w-5 sm:h-6 sm:w-6" />
+              <X className="h-6 w-6" />
             </button>
             
             {/* Image Container */}
-            <div className="flex-1 flex items-center justify-center min-h-0">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                className="max-w-full max-h-[60vh] sm:max-h-[80vh] object-contain rounded-lg shadow-2xl"
-              />
+            <div className="flex-1 flex items-center justify-center min-h-0 lg:max-w-[60%] bg-white sm:bg-transparent p-4 sm:p-0">
+              <div className="relative w-full sm:bg-white sm:rounded-xl sm:p-4 sm:shadow-2xl">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.alt}
+                  className="w-full h-auto max-h-[40vh] sm:max-h-[70vh] object-contain sm:rounded-lg"
+                  onError={handleImageError}
+                />
+                {/* Image Quality Badge */}
+                <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                  HD Quality
+                </div>
+              </div>
             </div>
             
-            {/* Description Panel */}
-            <div className={`lg:w-96 ${
+            {/* Enhanced Product Details Panel */}
+            <div className={`flex-1 sm:flex-none lg:w-[500px] lg:max-w-[40%] ${
               isDark ? 'bg-gray-800' : 'bg-white'
-            } rounded-lg p-6 lg:max-h-[80vh] lg:overflow-y-auto`}>
-              {/* Category Badge */}
-              <div className="mb-4">
-                <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                  {selectedImage.category}
-                </span>
-              </div>
+            } sm:rounded-xl p-4 sm:p-6 lg:max-h-[90vh] overflow-y-auto sm:shadow-2xl`}>
               
-              {/* Title */}
-              <h2 className={`text-2xl font-bold mb-4 ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}>
-                {selectedImage.title}
-              </h2>
-              
-              {/* Description */}
-              <div className={`text-sm leading-relaxed mb-6 ${
-                isDark ? 'text-gray-300' : 'text-gray-700'
-              }`}>
-                <p className="mb-4">{selectedImage.alt}</p>
-                
-                {/* Additional Details based on category */}
-                {selectedImage.category === 'Products' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Complete Product Range Overview</p>
-                    <p className="mb-3">Keyar offers a comprehensive range of cleaning solutions designed to meet every hygiene need of Indian households. Our product portfolio includes premium handwash, powerful toilet cleaners, effective floor disinfectants, streak-free glass cleaners, and multi-purpose surface cleaners.</p>
-                    <div className="space-y-2">
-                      <p>✓ 50+ different product variants available</p>
-                      <p>✓ ISO certified manufacturing processes</p>
-                      <p>✓ Affordable pricing for every household</p>
-                      <p>✓ Supporting Swachh Bharat Mission initiative</p>
-                      <p>✓ Made with international quality standards</p>
-                      <p>✓ Available across 15+ states in India</p>
+              {/* Header Section */}
+              <div className="mb-6">
+                {/* Category & Rating */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    {selectedImage.category}
+                  </span>
+                  {selectedImage.rating && (
+                    <div className="flex items-center space-x-1">
+                      <span className="text-yellow-500">★</span>
+                      <span className={`text-sm font-semibold ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        {selectedImage.rating}/5
+                      </span>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
                 
-                {selectedImage.category === 'Handwash' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Premium Antibacterial Handwash</p>
-                    <p className="mb-3">Keyar Handwash provides superior protection against germs and bacteria while keeping your hands soft and moisturized. Our advanced formula kills 99.9% of germs without drying out your skin, making it perfect for frequent daily use by the entire family.</p>
-                    <div className="space-y-2">
-                      <p>✓ Advanced antibacterial formula with 99.9% germ protection</p>
-                      <p>✓ Enriched with moisturizing agents to prevent dryness</p>
-                      <p>✓ pH balanced formula suitable for all skin types</p>
-                      <p>✓ Pleasant fragrance that lasts throughout the day</p>
-                      <p>✓ Available in 250ml, 500ml, 1L, and 5L bottles</p>
-                      <p>✓ Dermatologically tested and clinically proven</p>
-                      <p>✓ Safe for children and sensitive skin</p>
-                    </div>
-                  </div>
-                )}
+                {/* Product Name & Price */}
+                <h2 className={`text-xl sm:text-2xl font-bold mb-2 ${
+                  isDark ? 'text-white' : 'text-gray-900'
+                }`}>
+                  {selectedImage.productName || selectedImage.title}
+                </h2>
                 
-                {selectedImage.category === 'Toilet Cleaners' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Deep Cleaning Toilet Solutions</p>
-                    <p className="mb-3">Keyar Toilet Cleaner features an extra-power thick formula that clings to surfaces for deeper cleaning. It effectively removes tough stains, eliminates bad odors, and kills 99.9% of harmful bacteria and viruses, ensuring your toilet remains hygienic and fresh.</p>
-                    <div className="space-y-2">
-                      <p>✓ Extra-power thick gel formula for better adherence</p>
-                      <p>✓ Removes tough stains, limescale, and mineral deposits</p>
-                      <p>✓ Eliminates bad odors with long-lasting fresh fragrance</p>
-                      <p>✓ Kills 99.9% of harmful bacteria, viruses, and germs</p>
-                      <p>✓ Suitable for all types of toilet bowls and surfaces</p>
-                      <p>✓ Easy-to-use angled nozzle for under-rim cleaning</p>
-                      <p>✓ Child-resistant safety cap for added protection</p>
-                    </div>
-                  </div>
-                )}
-                
-                {(selectedImage.category === 'Floor Cleaners' || selectedImage.category === 'White Phenyle') && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Powerful Floor Disinfectant</p>
-                    <p className="mb-3">Keyar Phenyl is a concentrated floor cleaning solution that provides deep cleaning and disinfection. Our formula effectively removes dirt, grime, and stains while leaving floors spotless with a fresh, long-lasting fragrance that creates a pleasant indoor environment.</p>
-                    <div className="space-y-2">
-                      <p>✓ Powerful disinfectant action kills disease-causing germs</p>
-                      <p>✓ Concentrated formula - a little goes a long way</p>
-                      <p>✓ Safe for all floor types including marble, tiles, and wood</p>
-                      <p>✓ Long-lasting fresh fragrance in multiple variants</p>
-                      <p>✓ Biodegradable ingredients, environmentally friendly</p>
-                      <p>✓ Available in 1L, 5L containers for all needs</p>
-                      <p>✓ Easy mixing ratio: 50ml per bucket of water</p>
-                    </div>
-                  </div>
-                )}
-                
-                {selectedImage.category === 'Surface Cleaners' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Multi-Surface Cleaning Solution</p>
-                    <p className="mb-3">Keyar Surface Cleaner is perfect for cleaning kitchen counters, dining tables, appliances, and other surfaces. Our alcohol-based formula kills 99% of germs while leaving no sticky residue, making it ideal for food contact surfaces and daily cleaning routines.</p>
-                    <div className="space-y-2">
-                      <p>✓ Works effectively on multiple surface types</p>
-                      <p>✓ Alcohol-based sanitizer kills 99% of germs instantly</p>
-                      <p>✓ No sticky residue, dries quickly without streaks</p>
-                      <p>✓ Safe for food contact surfaces and appliances</p>
-                      <p>✓ Fresh, clean fragrance that doesn't overpower</p>
-                      <p>✓ Convenient 500ml spray bottle for easy application</p>
-                      <p>✓ Perfect for daily cleaning and sanitization</p>
-                    </div>
-                  </div>
-                )}
-                
-                {selectedImage.category === 'Glass Cleaners' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Streak-Free Glass Cleaning</p>
-                    <p className="mb-3">Keyar Glass Cleaner delivers professional-quality results for all glass surfaces including windows, mirrors, and glass doors. Our ammonia-based formula cuts through dirt and grime while providing crystal-clear, streak-free results that last longer.</p>
-                    <div className="space-y-2">
-                      <p>✓ Professional streak-free cleaning formula</p>
-                      <p>✓ Crystal clear shine on all glass surfaces</p>
-                      <p>✓ Quick-drying formula saves time and effort</p>
-                      <p>✓ Safe for tinted glass and delicate surfaces</p>
-                      <p>✓ Anti-static properties repel dust longer</p>
-                      <p>✓ Pleasant blue color indicates proper application</p>
-                      <p>✓ Works on mirrors, windows, car glass, and more</p>
-                    </div>
-                  </div>
-                )}
-                
-                {selectedImage.category === 'Dish Cleaners' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Effective Dishwashing Solution</p>
-                    <p className="mb-3">Keyar Dishwash liquid cuts through the toughest grease and food residues while being gentle on your hands. Our concentrated formula creates rich, long-lasting suds that make dishwashing easier and more efficient, with a refreshing lemon fragrance.</p>
-                    <div className="space-y-2">
-                      <p>✓ Superior grease-cutting action removes tough stains</p>
-                      <p>✓ Gentle on hands with moisturizing properties</p>
-                      <p>✓ Concentrated formula creates long-lasting rich suds</p>
-                      <p>✓ Refreshing lemon fragrance for pleasant washing</p>
-                      <p>✓ Biodegradable surfactants, eco-friendly formulation</p>
-                      <p>✓ Available in 250ml, 500ml, 1L bottles</p>
-                      <p>✓ Effective in both hard and soft water conditions</p>
-                    </div>
-                  </div>
-                )}
-                
-                {selectedImage.category === 'Bathroom Cleaners' && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Complete Bathroom Cleaning Solutions</p>
-                    <p className="mb-3">Our specialized bathroom cleaners are formulated to tackle the unique challenges of bathroom hygiene. From soap scum to hard water stains, mildew to bacteria, our products ensure your bathroom remains spotless, fresh, and hygienically clean.</p>
-                    <div className="space-y-2">
-                      <p>✓ Specialized formula for bathroom-specific cleaning challenges</p>
-                      <p>✓ Removes soap scum, hard water stains, and mineral deposits</p>
-                      <p>✓ Anti-bacterial action prevents mold and mildew growth</p>
-                      <p>✓ Safe for all bathroom surfaces including tiles and fixtures</p>
-                      <p>✓ Fresh fragrance eliminates bathroom odors effectively</p>
-                      <p>✓ Easy spray application for convenient cleaning</p>
-                      <p>✓ Regular use maintains long-term bathroom hygiene</p>
-                    </div>
-                  </div>
-                )}
-                
-                {(selectedImage.category === 'Showcase' || selectedImage.category === 'Demo') && (
-                  <div className="space-y-3">
-                    <p className="text-base font-medium mb-3">Quality Excellence & Innovation</p>
-                    <p className="mb-3">Keyar represents the pinnacle of cleaning product innovation in India. Our commitment to quality, affordability, and effectiveness has made us a trusted name in households across the nation. Every product undergoes rigorous testing to ensure it meets international quality standards.</p>
-                    <div className="space-y-2">
-                      <p>✓ Premium quality products with international standards</p>
-                      <p>✓ Trusted by over 10,000+ satisfied customers nationwide</p>
-                      <p>✓ ISO certified manufacturing with strict quality control</p>
-                      <p>✓ Pan-India availability through extensive distribution network</p>
-                      <p>✓ Continuous research and development for product improvement</p>
-                      <p>✓ Affordable pricing without compromising on quality</p>
-                      <p>✓ Supporting India's cleanliness mission with innovative solutions</p>
-                    </div>
+                {selectedImage.price && (
+                  <div className="flex items-center space-x-2 mb-4">
+                    <span className="text-2xl font-bold text-green-600">
+                      {selectedImage.price}
+                    </span>
+                    <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                      MRP (Inclusive of all taxes)
+                    </span>
                   </div>
                 )}
               </div>
-              
-              {/* Company Info */}
-              <div className={`pt-4 border-t ${
-                isDark ? 'border-gray-700' : 'border-gray-200'
-              }`}>
-                <p className={`text-xs ${
-                  isDark ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  Manufactured by Namaste SS International Pvt. Ltd.
+
+              {/* Product Description */}
+              <div className="mb-6">
+                <h3 className={`text-lg font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                  Product Description
+                </h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                  {selectedImage.description}
                 </p>
-                <p className={`text-xs mt-1 ${
-                  isDark ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  Quality assured • ISO certified • Made in India
-                </p>
+              </div>
+
+              {/* Key Features */}
+              {selectedImage.features && (
+                <div className="mb-6">
+                  <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Key Features
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {selectedImage.features.map((feature: string, index: number) => (
+                      <div key={index} className={`flex items-center space-x-2 p-2 rounded-lg ${
+                        isDark ? 'bg-gray-700' : 'bg-gray-50'
+                      }`}>
+                        <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                        <span className={`text-sm ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Specifications */}
+              {selectedImage.specifications && (
+                <div className="mb-6">
+                  <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    Product Specifications
+                  </h3>
+                  <ul className="space-y-2">
+                    {selectedImage.specifications.map((spec: string, index: number) => (
+                      <li key={index} className={`flex items-start space-x-2 text-sm ${
+                        isDark ? 'text-gray-300' : 'text-gray-700'
+                      }`}>
+                        <span className="text-blue-500 font-bold">•</span>
+                        <span>{spec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Usage Instructions */}
+              {selectedImage.usage && (
+                <div className="mb-6">
+                  <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    How to Use
+                  </h3>
+                  <div className={`p-4 rounded-lg border-l-4 border-blue-500 ${
+                    isDark ? 'bg-gray-700' : 'bg-blue-50'
+                  }`}>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                      {selectedImage.usage}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Company Information */}
+              <div className={`pt-4 border-t ${isDark ? 'border-gray-700' : 'border-gray-200'}`}>
+                <div className="text-center">
+                  <p className={`text-sm font-semibold mb-1 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                    Manufactured by
+                  </p>
+                  <p className={`text-lg font-bold text-blue-600 mb-2`}>
+                    Namaste SS International Pvt. Ltd.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-2 text-xs">
+                    <span className={`px-2 py-1 rounded-full ${isDark ? 'bg-green-800 text-green-200' : 'bg-green-100 text-green-700'}`}>
+                      ISO Certified
+                    </span>
+                    <span className={`px-2 py-1 rounded-full ${isDark ? 'bg-blue-800 text-blue-200' : 'bg-blue-100 text-blue-700'}`}>
+                      Made in India
+                    </span>
+                    <span className={`px-2 py-1 rounded-full ${isDark ? 'bg-purple-800 text-purple-200' : 'bg-purple-100 text-purple-700'}`}>
+                      Quality Assured
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Call to Action */}
+              <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="text-center">
+                  <p className={`text-sm mb-3 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                    Available at your nearest store or contact us for bulk orders
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                    <button className="px-4 py-2 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg font-semibold hover:from-green-600 hover:to-blue-700 transition-all duration-300 text-sm">
+                      Contact for Orders
+                    </button>
+                    <button className="px-4 py-2 border-2 border-blue-500 text-blue-500 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 text-sm">
+                      Find Store
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

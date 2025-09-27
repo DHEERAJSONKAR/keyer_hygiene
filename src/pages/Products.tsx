@@ -17,7 +17,7 @@ const Products: React.FC = () => {
       id: 'handwash',
       name: t('products.handwash.name'),
       description: t('products.handwash.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.49.jpeg',
+      image: '/gallery-images/9.png',
       features: ['Antibacterial', '99.9% Germ Protection', 'Moisturizing Formula'],
       color: 'from-green-500 to-green-600',
       detailedInfo: {
@@ -25,7 +25,7 @@ const Products: React.FC = () => {
         specifications: ['500ml, 1L, 5L bottles available', 'pH balanced formula', 'Dermatologically tested', 'Pleasant fragrance'],
         benefits: ['Kills 99.9% of germs and bacteria', 'Moisturizes while cleaning', 'Safe for frequent use', 'Suitable for all skin types'],
         usage: ['Apply 2-3 drops on wet hands', 'Rub for 20 seconds', 'Rinse thoroughly with water', 'Use regularly for best results'],
-        price: '₹85 - ₹450',
+        price: '₹149 - ₹1099',
         rating: 4.8
       }
     },
@@ -41,7 +41,7 @@ const Products: React.FC = () => {
         specifications: ['1L, 5L containers available', 'Concentrated white formula', 'Multiple fragrance options', 'Biodegradable ingredients', 'Non-staining formula'],
         benefits: ['Deep cleaning action', 'Long-lasting fresh fragrance', 'Kills 99.9% disease-causing germs', 'Safe for all floor types', 'Leaves floors streak-free'],
         usage: ['Mix 50ml in 1 bucket of water', 'Mop floors thoroughly', 'No need to rinse', 'Use daily for best hygiene', 'Ideal for bathroom and kitchen floors'],
-        price: '₹120 - ₹580',
+        price: '₹69 - ₹329',
         rating: 4.7
       }
     },
@@ -49,7 +49,7 @@ const Products: React.FC = () => {
       id: 'toilet',
       name: t('products.toilet.name'),
       description: t('products.toilet.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
+      image: '/gallery-images/3.png',
       features: ['Extra Power', 'Thick Formula', 'Stain Removal'],
       color: 'from-purple-500 to-purple-600',
       detailedInfo: {
@@ -57,7 +57,7 @@ const Products: React.FC = () => {
         specifications: ['500ml, 1L bottles available', 'Thick gel formula', 'Hydrochloric acid based', 'Child-resistant cap'],
         benefits: ['Removes tough stains and limescale', 'Eliminates bad odors', 'Kills harmful bacteria and viruses', 'Fresh toilet fragrance'],
         usage: ['Apply under rim and bowl', 'Let sit for 10 minutes', 'Scrub with brush', 'Flush to rinse'],
-        price: '₹95 - ₹180',
+        price: '₹99 - ₹799',
         rating: 4.9
       }
     },
@@ -65,7 +65,7 @@ const Products: React.FC = () => {
       id: 'glass',
       name: t('products.glass.name'),
       description: t('products.glass.description'),
-      image: '/gallery-images/3.png',
+      image: '/gallery-images/4.png',
       features: ['Streak-Free', 'Crystal Clear', 'Quick Action'],
       color: 'from-cyan-500 to-cyan-600',
       detailedInfo: {
@@ -73,31 +73,47 @@ const Products: React.FC = () => {
         specifications: ['500ml spray bottle', 'Ammonia-based formula', 'Anti-static properties', 'Pleasant blue color'],
         benefits: ['No streaks or residue', 'Crystal clear shine', 'Quick drying formula', 'Safe for tinted glass'],
         usage: ['Spray directly on surface', 'Wipe with clean cloth', 'Buff for extra shine', 'Works on mirrors too'],
-        price: '₹75 - ₹140',
+        price: '₹99 - ₹999',
         rating: 4.6
       }
     },
     {
-      id: 'dish',
-      name: t('products.dish.name'),
-      description: t('products.dish.description'),
-      image: '/gallery-images/4.png',
-      features: ['Grease Cutting', 'Gentle on Hands', 'Concentrated Formula'],
-      color: 'from-yellow-500 to-yellow-600',
+      id: 'detergent-gel',
+      name: 'Liquid Detergent Gel',
+      description: 'Premium concentrated liquid detergent gel for superior cleaning with advanced stain removal technology',
+      image: '/gallery-images/5.png',
+      features: ['Ultra Concentrated Gel', 'Advanced Stain Removal', 'Fabric Care Formula', 'Long Lasting Fragrance'],
+      color: 'from-blue-500 to-green-500',
       detailedInfo: {
-        fullDescription: 'Keyar Dishwash liquid cuts through grease and grime while being gentle on your hands. Concentrated formula means a little goes a long way.',
-        specifications: ['250ml, 500ml, 1L bottles', 'Concentrated formula', 'Lemon fresh fragrance', 'Biodegradable surfactants'],
-        benefits: ['Cuts grease effectively', 'Gentle on hands', 'Long-lasting suds', 'Pleasant lemon fragrance'],
-        usage: ['Add few drops to sponge', 'Create rich lather', 'Wash dishes thoroughly', 'Rinse with clean water'],
+        fullDescription: 'Keyar Liquid Detergent Gel is a premium concentrated formula that delivers powerful cleaning performance while caring for your fabrics. Our advanced gel technology penetrates deep into fabric fibers to remove tough stains, dirt, and odors while maintaining fabric softness and color vibrancy.',
+        specifications: ['Available in 500ml, 1L, 2L, 5L containers', 'Ultra-concentrated gel formula - 4x more cleaning power', 'Active enzyme technology for stain removal', 'pH balanced for fabric care', 'Biodegradable and eco-friendly ingredients', 'Anti-bacterial properties', 'Works in all water types'],
+        benefits: ['Removes tough stains like oil, grease, mud, and food marks', 'Maintains fabric softness and color brightness', 'Deep cleaning action with gentle fabric care', 'Long-lasting fresh fragrance', 'Highly economical - concentrated formula lasts longer', 'Suitable for both hand wash and machine wash', 'Anti-bacterial protection for hygiene'],
+        usage: ['For Machine Wash: Use 30ml gel for 1 full load', 'For Hand Wash: Mix 10ml gel in bucket of water', 'For tough stains: Apply directly and let sit for 5 minutes', 'Wash as usual with normal water temperature', 'Works effectively in cold water too'],
         price: '₹45 - ₹165',
         rating: 4.5
+      }
+    },
+    {
+      id: 'bathroom-cleaner',
+      name: 'Bathroom Cleaner ',
+      description: 'Specialized bathroom cleaner formulated to tackle the unique cleaning challenges of bathroom hygiene',
+      image: '/gallery-images/Untitled-1.png',
+      features: ['Anti-Bacterial Action', 'Removes Soap Scum', 'Tiles & Surfaces', 'Fresh Fragrance'],
+      color: 'from-red-500 to-pink-600',
+      detailedInfo: {
+        fullDescription: 'Keyar Bathroom Cleaner & Tiles Cleaner is specially formulated to handle all bathroom cleaning challenges. From soap scum and hard water stains to mildew and bacterial growth, this powerful cleaner ensures your bathroom remains spotless, hygienic, and fresh.',
+        specifications: ['Available in 500ml bottles', 'Specialized formula for bathroom surfaces', 'Anti-bacterial and anti-fungal properties', 'Safe for tiles, ceramics, and fixtures', 'pH balanced for different surface materials', 'Contains lime scale removal agents', 'Pleasant bathroom-fresh fragrance'],
+        benefits: ['Removes soap scum, hard water stains, and mineral deposits', 'Anti-bacterial action prevents bacterial and fungal growth', 'Safe for all bathroom surfaces including tiles and fixtures', 'Eliminates bad odors and leaves fresh fragrance', 'Easy application with effective cleaning power', 'Prevents mildew and mold formation', 'Restores shine to tiles and ceramic surfaces'],
+        usage: ['Spray directly on bathroom surfaces, tiles, and fixtures', 'For tough stains, let it sit for 3-5 minutes', 'Scrub with brush or sponge if needed', 'Rinse thoroughly with water', 'Use regularly to maintain bathroom hygiene', 'Ensure good ventilation while using'],
+        price: '₹89 - ₹299',
+        rating: 4.6
       }
     },
     {
       id: 'surface',
       name: t('products.surface.name'),
       description: t('products.surface.description'),
-      image: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.55.jpeg',
+      image: '/gallery-images/2.png',
       features: ['Multi-Surface', '99% Germ Kill', 'Fresh Scent'],
       color: 'from-orange-500 to-orange-600',
       detailedInfo: {
@@ -105,7 +121,7 @@ const Products: React.FC = () => {
         specifications: ['500ml spray bottle', 'Multi-surface formula', 'Alcohol-based sanitizer', 'Various fragrances available'],
         benefits: ['Works on multiple surfaces', 'Kills 99% of germs', 'No sticky residue', 'Fresh, clean fragrance'],
         usage: ['Spray on surface', 'Wipe with clean cloth', 'No rinsing required', 'Safe for food contact surfaces'],
-        price: '₹85 - ₹160',
+        price: '₹99 - ₹999',
         rating: 4.7
       }
     }

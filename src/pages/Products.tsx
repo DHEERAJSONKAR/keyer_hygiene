@@ -89,7 +89,7 @@ const Products: React.FC = () => {
         specifications: ['Available in 500ml, 1L, 2L, 5L containers', 'Ultra-concentrated gel formula - 4x more cleaning power', 'Active enzyme technology for stain removal', 'pH balanced for fabric care', 'Biodegradable and eco-friendly ingredients', 'Anti-bacterial properties', 'Works in all water types'],
         benefits: ['Removes tough stains like oil, grease, mud, and food marks', 'Maintains fabric softness and color brightness', 'Deep cleaning action with gentle fabric care', 'Long-lasting fresh fragrance', 'Highly economical - concentrated formula lasts longer', 'Suitable for both hand wash and machine wash', 'Anti-bacterial protection for hygiene'],
         usage: ['For Machine Wash: Use 30ml gel for 1 full load', 'For Hand Wash: Mix 10ml gel in bucket of water', 'For tough stains: Apply directly and let sit for 5 minutes', 'Wash as usual with normal water temperature', 'Works effectively in cold water too'],
-        price: '₹45 - ₹165',
+        price: '₹99 - ₹999',
         rating: 4.5
       }
     },
@@ -123,6 +123,22 @@ const Products: React.FC = () => {
         usage: ['Spray on surface', 'Wipe with clean cloth', 'No rinsing required', 'Safe for food contact surfaces'],
         price: '₹99 - ₹999',
         rating: 4.7
+      }
+    },
+    {
+      id: 'dish-cleaner',
+      name: 'Dish Cleaner',
+      description: 'Professional dish and utensil cleaner for tough stains and grease removal',
+      image: '/gallery-images/1.png',
+      features: ['Heavy Duty Cleaning', 'Grease Removal', 'Utensil Safe', 'Concentrated Formula'],
+      color: 'from-yellow-500 to-orange-600',
+      detailedInfo: {
+        fullDescription: 'Keyar Dish Cleaner is a powerful concentrated formula designed specifically for cleaning dishes, utensils, and cookware. It effectively removes tough grease, oil stains, and food residues while being gentle on your hands and safe for all types of utensils.',
+        specifications: ['Available in 250ml, 500ml, 1L bottles', 'Concentrated liquid formula', 'Biodegradable ingredients', 'Pleasant lemon fragrance', 'Non-toxic formula', 'Suitable for all utensil types'],
+        benefits: ['Removes tough grease and oil stains', 'Gentle on hands with moisturizing agents', 'Concentrated formula - little goes a long way', 'Safe for all cookware including non-stick', 'Antibacterial properties for hygiene', 'Pleasant fragrance leaves dishes fresh', 'Economical and long-lasting'],
+        usage: ['Add 5ml to sink full of water', 'Soak dishes for 2-3 minutes for tough stains', 'Scrub gently with sponge or brush', 'Rinse thoroughly with clean water', 'For heavy grease, apply directly and scrub'],
+        price: '₹129 - ₹999',
+        rating: 4.8
       }
     }
   ];
@@ -807,7 +823,7 @@ Visit us at: www.keyarhygiene.com
       <section className={`py-16 ${isDark ? 'bg-gray-800' : 'bg-gray-50'} transition-colors duration-300`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <img
-            src="/gallery-images/WhatsApp Image 2025-09-24 at 12.12.11.jpeg"
+            src="/gallery-images/keyar.jpeg"
             alt="Keyar Products Range"
             className="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl mb-8"
           />

@@ -25,7 +25,7 @@ const Gallery: React.FC = () => {
 
   const galleryImages: GalleryImage[] = [
     {
-      src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.12.11.jpeg',
+      src: '/gallery-images/keyar.jpeg',
       alt: 'Keyar Product Range - Complete cleaning solutions for every need',
       category: 'Complete Range',
       title: 'Complete Product Range',
@@ -49,45 +49,6 @@ const Gallery: React.FC = () => {
       description: 'Specialized bathroom cleaner formulated to tackle soap scum, hard water stains, and bacterial growth.',
       specifications: ['500ml bottles available', 'pH balanced formula', 'Safe for tiles and ceramics', 'Anti-bacterial properties'],
       usage: 'Spray on surfaces, let sit 3-5 minutes, scrub if needed, rinse thoroughly'
-    },
-    {
-      src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.49.jpeg',
-      alt: 'Keyar Handwash - Premium antibacterial protection with moisturizing formula',
-      category: 'Handwash',
-      title: 'Premium Antibacterial Handwash',
-      productName: 'Keyar Handwash',
-      price: '₹149 - ₹1099',
-      rating: 4.8,
-      features: ['99.9% Germ Protection', 'Moisturizing Formula', 'pH Balanced', 'Pleasant Fragrance'],
-      description: 'Advanced antibacterial handwash that kills 99.9% of germs while keeping hands soft and moisturized.',
-      specifications: ['Available in 250ml, 500ml, 1L, 5L', 'Dermatologically tested', 'Safe for all skin types', 'Long-lasting fragrance'],
-      usage: 'Apply 2-3 drops on wet hands, rub for 20 seconds, rinse thoroughly'
-    },
-    {
-      src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.50.jpeg',
-      alt: 'Keyar Toilet Cleaner - Extra power thick formula for deep cleaning',
-      category: 'Toilet Cleaners',
-      title: 'Extra Power Toilet Cleaner',
-      productName: 'Keyar Toilet Cleaner',
-      price: '₹99 - ₹799',
-      rating: 4.9,
-      features: ['Extra Power Formula', 'Thick Gel Formula', 'Stain Removal', 'Germ Kill 99.9%'],
-      description: 'Thick formula toilet cleaner that clings to surfaces for deeper cleaning and removes tough stains.',
-      specifications: ['500ml, 1L bottles', 'Hydrochloric acid based', 'Child-resistant cap', 'Angled nozzle design'],
-      usage: 'Apply under rim and bowl, let sit 10 minutes, scrub with brush, flush to rinse'
-    },
-    {
-      src: '/gallery-images/WhatsApp Image 2025-09-24 at 12.11.55.jpeg',
-      alt: 'Keyar Surface Cleaner - Multi-surface cleaning solution for kitchen and home',
-      category: 'Surface Cleaners',
-      title: 'Multi-Surface Cleaner',
-      productName: 'Keyar Surface Cleaner',
-      price: '₹99 - ₹999',
-      rating: 4.7,
-      features: ['Multi-Surface Formula', '99% Germ Kill', 'No Sticky Residue', 'Fresh Scent'],
-      description: 'Perfect for kitchen counters, tables, and appliances. Kills 99% germs with fresh scent.',
-      specifications: ['500ml spray bottle', 'Alcohol-based formula', 'Various fragrances', 'Food-safe surfaces'],
-      usage: 'Spray on surface, wipe with clean cloth, no rinsing required'
     },
     {
       src: '/gallery-images/2.png',
@@ -179,6 +140,19 @@ const Gallery: React.FC = () => {
       description: 'Advanced antibacterial handwash formula perfect for frequent daily use by the entire family.',
       specifications: ['Multiple size options', 'Advanced antibacterial technology', 'Skin-friendly pH', 'Clinically proven'],
       usage: 'Use regularly throughout the day, especially before meals and after activities'
+    },
+    {
+      src: '/gallery-images/1.png',
+      alt: 'Keyar Dish Cleaner - Professional utensil cleaner for tough grease removal',
+      category: 'Dish Cleaners',
+      title: 'Professional Dish Cleaner',
+      productName: 'Keyar Dish Cleaner',
+      price: '₹129 - ₹999',
+      rating: 4.8,
+      features: ['Heavy Duty Cleaning', 'Grease Removal', 'Utensil Safe', 'Concentrated Formula'],
+      description: 'Powerful concentrated formula designed specifically for cleaning dishes, utensils, and cookware. Removes tough grease and oil stains while being gentle on hands.',
+      specifications: ['Available in 250ml, 500ml, 1L bottles', 'Concentrated liquid formula', 'Biodegradable ingredients', 'Pleasant lemon fragrance', 'Non-toxic formula', 'Suitable for all utensil types'],
+      usage: 'Add 5ml to sink full of water, soak dishes for 2-3 minutes for tough stains, scrub gently with sponge, rinse thoroughly with clean water'
     }
   ];
 
